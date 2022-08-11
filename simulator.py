@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as ani
 import numpy as np
+from manimlib import *
+
 
 GREY = (0.78, 0.78, 0.78)
 RED = (0.96, 0.15, 0.15)
