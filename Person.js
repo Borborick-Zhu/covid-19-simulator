@@ -1,0 +1,94 @@
+let numBalls = 300;
+let spring = 0.01;
+let gravity = 0.03;
+let balls = [];
+let speed = 2; 
+let radius = 20;
+
+function setup() {
+  createCanvas(720, 400);
+  for (let i = 0; i < numBalls; i++) {
+    balls[i] = new Ball(
+      random(width),
+      random(height),
+      radius,
+      i,
+      balls
+    );
+  }
+  noStroke()
+  fill(255, 204);
+}
+
+function draw() {
+  background(0);
+  balls.forEach(ball => {
+    ball.collide();
+    ball.move();
+    ball.display();
+  });
+}
+
+class Ball {
+  constructor(xin, yin, din, idin, oin, status) {
+    this.x = xin;
+    this.y = yin;
+    this.vx = random(-1,1) * speed;
+    this.vy = random(-1,1) * speed;
+    this.diameter = din;
+    this.id = idin;
+    this.others = oin;
+    this.status = status;
+  }
+
+  collide() {
+    for (let i = 0; i < numBalls; i++) {
+      // console.log(others[i]);
+      let dx = this.others[i].x - this.x;
+      let dy = this.others[i].y - this.y;
+      let distance = sqrt(dx * dx + dy * dy);
+      let minDist = this.others[i].diameter / 2 + this.diameter / 2;
+      //   console.log(distance);
+      //console.log(minDist);
+      if (distance < minDist) {
+        //console.log("2");
+        let angle = atan2(dy, dx);
+        let targetX = this.x + cos(angle) * minDist;
+        let targetY = this.y + sin(angle) * minDist;
+        let ax = (targetX - this.others[i].x) * spring;
+        let ay = (targetY - this.others[i].y) * spring;
+        this.vx -= ax;
+        this.vy -= ay;
+        this.others[i].vx += ax;
+        this.others[i].vy += ay;
+      }
+    }
+  }
+  // work on infection logic next.
+  isInfected() {
+
+  }
+
+  move() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x + this.diameter / 2 > width) {
+      this.x = width - this.diameter / 2;
+      this.vx *= -1;
+    } else if (this.x - this.diameter / 2 < 0) {
+      this.x = this.diameter / 2;
+      this.vx *= -1;
+    }
+    if (this.y + this.diameter / 2 > height) {
+      this.y = height - this.diameter / 2;
+      this.vy *= -1;
+    } else if (this.y - this.diameter / 2 < 0) {
+      this.y = this.diameter / 2;
+      this.vy *= -1;
+    }
+  }
+
+  display() {
+    circle(this.x, this.y, this.diameter);
+  }
+}
