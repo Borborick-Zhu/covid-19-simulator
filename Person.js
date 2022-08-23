@@ -5,7 +5,10 @@ let balls = [];
 let speed = 1; 
 let radius = 10;
 const COLORS = ['#c8c8c8', '#f65c78', '#8cba51', '#79bac1']; // White, Red, Green, Blue
-let infectionRate = 95;
+let infectionRate = 50;
+let infectionRateRecovered = 80;
+let infectionRateVaccine = 95;
+let infectionRateVacAndRecovered = 99;
 let infectionTime = 14;
 
 class Ball {
@@ -53,15 +56,21 @@ class Ball {
       if (rand > infectionRate) {
         this.status = 1;
       } 
+    } else if (this.others[otherIndex].status == 2) {
+      let rand = Math.random() * 100;
+      if (rand > 99.99) {
+        this.status = 1;
+      }
     }
   }
 
   checkInfection() {
     if (this.status == 1) {
       if (this.daysInfected < infectionTime) {
-        this.daysInfected += 0.05;
+        this.daysInfected += 0.075;
       } else {
         this.status = 2;
+        this.daysInfected = 0;
       }
     }
   }
