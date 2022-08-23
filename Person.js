@@ -2,32 +2,10 @@ let numBalls = 300;
 let spring = 0.01;
 let gravity = 0.03;
 let balls = [];
-let speed = 2; 
-let radius = 20;
-
-function setup() {
-  createCanvas(720, 400);
-  for (let i = 0; i < numBalls; i++) {
-    balls[i] = new Ball(
-      random(width),
-      random(height),
-      radius,
-      i,
-      balls
-    );
-  }
-  noStroke()
-  fill(255, 204);
-}
-
-function draw() {
-  background(0);
-  balls.forEach(ball => {
-    ball.collide();
-    ball.move();
-    ball.display();
-  });
-}
+let speed = 1; 
+let radius = 10;
+const COLORS = ['#c8c8c8', '#f65c78', '#8cba51', '#79bac1']; // White, Red, Green, Blue
+let infectionRate = 95;
 
 class Ball {
   constructor(xin, yin, din, idin, oin, status) {
@@ -43,15 +21,11 @@ class Ball {
 
   collide() {
     for (let i = 0; i < numBalls; i++) {
-      // console.log(others[i]);
       let dx = this.others[i].x - this.x;
       let dy = this.others[i].y - this.y;
       let distance = sqrt(dx * dx + dy * dy);
       let minDist = this.others[i].diameter / 2 + this.diameter / 2;
-      //   console.log(distance);
-      //console.log(minDist);
       if (distance < minDist) {
-        //console.log("2");
         let angle = atan2(dy, dx);
         let targetX = this.x + cos(angle) * minDist;
         let targetY = this.y + sin(angle) * minDist;
@@ -61,12 +35,20 @@ class Ball {
         this.vy -= ay;
         this.others[i].vx += ax;
         this.others[i].vy += ay;
+
+        this.isInfected(i);
       }
     }
   }
   // work on infection logic next.
-  isInfected() {
-
+  isInfected(otherIndex) {
+    // infection rate. 
+    if (this.others[otherIndex].status == 1) {
+      let rand = Math.floor(Math.random() * 100);
+      if (rand > infectionRate) {
+        this.status = 1;
+      } 
+    }
   }
 
   move() {
@@ -89,6 +71,9 @@ class Ball {
   }
 
   display() {
+    fill(COLORS[this.status]);
     circle(this.x, this.y, this.diameter);
   }
+
+  
 }
