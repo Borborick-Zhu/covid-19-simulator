@@ -1,11 +1,12 @@
-let numBalls = 300;
-let spring = 0.01;
+let numBalls = 400;
+let spring = 0.001;
 let gravity = 0.03;
 let balls = [];
 let speed = 1; 
 let radius = 10;
 const COLORS = ['#c8c8c8', '#f65c78', '#8cba51', '#79bac1']; // White, Red, Green, Blue
 let infectionRate = 95;
+let infectionTime = 14;
 
 class Ball {
   constructor(xin, yin, din, idin, oin, status) {
@@ -17,6 +18,10 @@ class Ball {
     this.id = idin;
     this.others = oin;
     this.status = status;
+    this.daysInfected = 0;
+    if (this.status == 1) {
+      this.daysInfected = 1;
+    }
   }
 
   collide() {
@@ -51,6 +56,16 @@ class Ball {
     }
   }
 
+  checkInfection() {
+    if (this.status == 1) {
+      if (this.daysInfected < infectionTime) {
+        this.daysInfected += 0.05;
+      } else {
+        this.status = 2;
+      }
+    }
+  }
+
   move() {
     this.x += this.vx;
     this.y += this.vy;
@@ -68,6 +83,8 @@ class Ball {
       this.y = this.diameter / 2;
       this.vy *= -1;
     }
+
+    this.checkInfection();
   }
 
   display() {
