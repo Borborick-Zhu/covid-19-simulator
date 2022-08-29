@@ -4,6 +4,7 @@ function setup() {
     createCanvas(720, 400);
     background(0);
     frameRate(FRAME_RATE);
+    controls();
     importPeople();
     
 
