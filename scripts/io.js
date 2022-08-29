@@ -6,3 +6,5 @@ function controls() {
     numBalls = createSlider(100, 1000, 400, 50);
     speed = createSlider(0, 5, 2, 1);
 }
+
+
