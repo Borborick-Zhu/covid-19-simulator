@@ -4,6 +4,7 @@ let radius = 10;
 const COLORS = ['#c8c8c8', '#f65c78', '#8cba51', '#79bac1']; // White, Red, Green, Blue
 let infectionTime = 14; 
 
+
 class Ball {
   constructor(xin, yin, din, idin, oin, status) {
     this.x = xin;
@@ -93,6 +94,4 @@ class Ball {
     fill(COLORS[this.status]);
     circle(this.x, this.y, this.diameter);
   }
-
-  
 }
