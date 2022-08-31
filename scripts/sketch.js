@@ -1,4 +1,4 @@
-const FRAME_RATE = 60;
+const FRAME_RATE = 120;
 
 function setup() {
     createCanvas(720, 400);
