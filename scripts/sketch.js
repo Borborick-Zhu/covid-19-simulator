@@ -7,8 +7,6 @@ function setup() {
     controls();
     importPeople();
     
-
-    
 }
   
 

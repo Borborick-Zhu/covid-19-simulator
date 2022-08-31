@@ -1,9 +1,8 @@
 let spring = 0.001;
 let balls = [];
 let radius = 10;
-const COLORS = ['#c8c8c8', '#f65c78', '#8cba51', '#79bac1']; // White, Red, Green, Blue
 let infectionTime = 14; 
-
+const COLORS = ['#c8c8c8', '#f65c78', '#8cba51', '#79bac1']; // White, Red, Green, Blue
 
 class Ball {
   constructor(xin, yin, din, idin, oin, status) {
