@@ -6,7 +6,6 @@ function setup() {
     frameRate(FRAME_RATE);
     controls();
     importPeople();
-    
 }
   
 

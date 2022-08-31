@@ -10,6 +10,16 @@ function controls() {
         balls = [];
         importPeople();
     });
+
+    infectionRate.input(() => {
+        balls = [];
+        importPeople();
+    });
+
+    numBalls.input(() => {
+        balls = [];
+        importPeople();
+    });
 }
 
 
