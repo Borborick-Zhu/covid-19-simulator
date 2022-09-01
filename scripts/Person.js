@@ -1,6 +1,6 @@
 let spring = 0.001;
 let balls = [];
-let radius = 10;
+let radius = 5;
 let infectionTime = 14; 
 const COLORS = ['#c8c8c8', '#f65c78', '#8cba51', '#79bac1']; // White, Red, Green, Blue
 
@@ -52,6 +52,7 @@ class Ball {
     } else if (this.others[otherIndex].status == 2) {
       let rand = Math.random() * 100;
       if (rand < 0.0001) {
+        // probability of re-infection.
         this.status = 1;
       }
     }

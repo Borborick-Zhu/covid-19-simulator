@@ -1,6 +1,7 @@
 let infectionRate; 
 let numBalls;
 let speed;
+let percentVacc; 
 function controls() {
     IRlabel = createDiv('Infection Rate');
     NBlabel = createDiv('Population');
@@ -11,6 +12,7 @@ function controls() {
     numBalls.parent(NBlabel);
     speed = createSlider(0, 5, 2, 1);
     speed.parent(slabel);
+    percentVacc = createSlider(0, 100, 60, 5);
     speed.input(() => {
         //as the value of speed changes.
         balls = [];
