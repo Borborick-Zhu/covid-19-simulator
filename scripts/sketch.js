@@ -36,5 +36,10 @@ function importPeople() {
         0
         ); 
     }
-    balls[numBalls.value() - 1]. status = 1;
+    let percentVal = percentVacc.value()/ 100;
+    for (let j = 0; j < percentVal * numBalls.value(); j++) {
+        balls[j].status = 3;
+    }
+    balls[numBalls.value() - 1].status = 1;
+    
 }

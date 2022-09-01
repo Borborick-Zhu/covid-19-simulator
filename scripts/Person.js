@@ -1,6 +1,6 @@
 let spring = 0.001;
 let balls = [];
-let radius = 5;
+let radius = 7;
 let infectionTime = 14; 
 const COLORS = ['#c8c8c8', '#f65c78', '#8cba51', '#79bac1']; // White, Red, Green, Blue
 
@@ -14,9 +14,13 @@ class Ball {
     this.id = idin;
     this.others = oin;
     this.status = status;
+    this.vaccinated = false; 
     this.daysInfected = 0;
     if (this.status == 1) {
       this.daysInfected = 1;
+    }
+    if (this.status == 3) {
+      this.vaccinated = true;
     }
   }
 
@@ -44,18 +48,34 @@ class Ball {
   // work on infection logic next.
   isInfected(otherIndex) {
     // infection rate. 
-    if (this.others[otherIndex].status == 1) {
-      let rand = Math.floor(Math.random() * 100);
-      if (rand <= infectionRate.value()) {
-        this.status = 1;
-      } 
-    } else if (this.others[otherIndex].status == 2) {
-      let rand = Math.random() * 100;
-      if (rand < 0.0001) {
-        // probability of re-infection.
-        this.status = 1;
+    let rand = Math.floor(Math.random() * 100);
+    if (this.status == 1) {
+      // meaning itself is infected. 
+      if (this.others[otherIndex].status == 0) {
+        if (rand <= infectionRate.value()) {
+          this.others[otherIndex].status = 1;
+          this.others[otherIndex].daysInfected = 1; 
+        }
+      } else if (this.others[otherIndex].status == 2 && !this.others[otherIndex].vaccinated) {
+        //chance of reinfection is lower. 20%. 
+        if (rand <= 20) {
+          this.others[otherIndex].status = 1; 
+          this.others[otherIndex].daysInfected = 1; 
+        }
+      } else if (this.others[otherIndex].status == 3) {
+        //chance of infection after 3 doses. Less than 3 percent. 
+        if (rand < 3) {
+          this.others[otherIndex].status = 1; 
+          this.others[otherIndex].daysInfected = 1; 
+        }
+      } else {
+        // they have healed and they are also vaccinated. 
+        if (rand <= 1) {
+          this.others[otherIndex].status = 1;
+          this.others[otherIndex].daysInfected = 1; 
+        }
       }
-    }
+    }  
   }
 
   checkInfection() {
