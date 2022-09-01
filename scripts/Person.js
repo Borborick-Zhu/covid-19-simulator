@@ -46,12 +46,12 @@ class Ball {
     // infection rate. 
     if (this.others[otherIndex].status == 1) {
       let rand = Math.floor(Math.random() * 100);
-      if (rand > infectionRate.value()) {
+      if (rand <= infectionRate.value()) {
         this.status = 1;
       } 
     } else if (this.others[otherIndex].status == 2) {
       let rand = Math.random() * 100;
-      if (rand > 99.9999) {
+      if (rand < 0.0001) {
         this.status = 1;
       }
     }
