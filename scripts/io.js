@@ -9,7 +9,7 @@ function controls() {
     pVlabel = createDiv('Percent Vaccinated');
     infectionRate = createSlider(10, 100, 50, 5);
     infectionRate.parent(IRlabel);
-    numBalls = createSlider(100, 1000, 400, 50);
+    numBalls = createSlider(100, 500, 300, 50);
     numBalls.parent(NBlabel);
     speed = createSlider(0, 5, 2, 1);
     speed.parent(slabel);
