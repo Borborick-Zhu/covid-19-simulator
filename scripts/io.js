@@ -3,20 +3,44 @@ let numBalls;
 let speed;
 let percentVacc; 
 function controls() {
-    IRlabel = createDiv('Infection Rate');
-    NBlabel = createDiv('Population');
-    slabel = createDiv('Speed');
-    pVlabel = createDiv('Percent Vaccinated');
+    let divlabel = document.getElementById("labels");
+
+    // create divs.
+    const IRDiv = document.createElement("div");
+    const NBDiv = document.createElement("div");
+    const sDiv = document.createElement("div");
+    const PVDiv = document.createElement("div");
+
+    //create text labels.
+    var textIR = document.createTextNode("Infection Rate: ");
+    var textNB = document.createTextNode("Population: ");
+    var textS = document.createTextNode("Speed of Simulation: ");
+    var textPV = document.createTextNode("Percent Vaccinated: ");
+
+    // append the text to the divs.
+    IRDiv.appendChild(textIR);
+    NBDiv.appendChild(textNB);
+    sDiv.appendChild(textS);
+    PVDiv.appendChild(textPV);
+
+    // create sliders.
     infectionRate = createSlider(10, 100, 50, 5);
-    infectionRate.parent(IRlabel);
+    infectionRate.parent(IRDiv);
     numBalls = createSlider(100, 500, 300, 50);
-    numBalls.parent(NBlabel);
+    numBalls.parent(NBDiv);
     speed = createSlider(0, 5, 2, 1);
-    speed.parent(slabel);
+    speed.parent(sDiv);
     percentVacc = createSlider(0, 100, 60, 5);
-    percentVacc.parent(pVlabel);
+    percentVacc.parent(PVDiv);
+
+    // add parents to label.
+    divlabel.appendChild(IRDiv);
+    divlabel.appendChild(NBDiv);
+    divlabel.appendChild(sDiv);
+    divlabel.appendChild(PVDiv);
+    
+    // input changes.
     speed.input(() => {
-        //as the value of speed changes.
         balls = [];
         importPeople();
     });
@@ -36,8 +60,6 @@ function controls() {
     });
 }
 
-function style() {
-    
-}
+
 
 
