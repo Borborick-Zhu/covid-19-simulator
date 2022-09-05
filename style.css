@@ -6,3 +6,14 @@ html, body {
 canvas {
   display: block;
 }
+
+.sim1-container {
+  display: flex;
+}
+
+.labels {
+  display: flex;
+  flex-direction: column;
+}
+
+

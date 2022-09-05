@@ -1,7 +1,8 @@
 const FRAME_RATE = 60;
 
 function setup() {
-    createCanvas(720, 400);
+    var canvas = createCanvas(720, 400);
+    canvas.parent('canvasForHTML');
     background(0);
     frameRate(FRAME_RATE);
     controls();
