@@ -7,6 +7,10 @@ canvas {
   display: block;
 }
 
+p {
+  font-family: 'Poppins', sans-serif;
+}
+
 .sim1-container {
   display: flex;
 }
@@ -16,6 +20,7 @@ canvas {
   grid-template-columns: 1fr 1fr;
   column-gap: 40px;
   row-gap: 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 
