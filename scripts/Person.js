@@ -70,7 +70,7 @@ class Ball {
         }
       } else {
         // they have healed and they are also vaccinated. 
-        if (rand <= 1) {
+        if (rand == 0) {
           this.others[otherIndex].status = 1;
           this.others[otherIndex].daysInfected = 1; 
         }
@@ -81,6 +81,7 @@ class Ball {
   checkInfection() {
     if (this.status == 1) {
       if (this.daysInfected < infectionTime) {
+        // 4 days per second.
         this.daysInfected += 0.25;
       } else {
         this.status = 2;

@@ -20,7 +20,7 @@ function controls() {
 
     // create sliders.
     infectionRate = createSlider(10, 100, 50, 5);
-    numBalls = createSlider(100, 500, 300, 50);
+    numBalls = createSlider(100, 500, 400, 50);
     speed = createSlider(0, 5, 2, 1);
     percentVacc = createSlider(0, 100, 60, 5);
 
