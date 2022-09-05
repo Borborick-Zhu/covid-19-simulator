@@ -17,27 +17,30 @@ function controls() {
     var textS = document.createTextNode("Speed of Simulation: ");
     var textPV = document.createTextNode("Percent Vaccinated: ");
 
-    // append the text to the divs.
-    IRDiv.appendChild(textIR);
-    NBDiv.appendChild(textNB);
-    sDiv.appendChild(textS);
-    PVDiv.appendChild(textPV);
 
     // create sliders.
     infectionRate = createSlider(10, 100, 50, 5);
-    infectionRate.parent(IRDiv);
     numBalls = createSlider(100, 500, 300, 50);
-    numBalls.parent(NBDiv);
     speed = createSlider(0, 5, 2, 1);
-    speed.parent(sDiv);
     percentVacc = createSlider(0, 100, 60, 5);
-    percentVacc.parent(PVDiv);
 
     // add parents to label.
+    IRDiv.appendChild(textIR);
     divlabel.appendChild(IRDiv);
+    infectionRate.parent(divlabel);
+
+    NBDiv.appendChild(textNB);
     divlabel.appendChild(NBDiv);
+    numBalls.parent(divlabel);
+
+    sDiv.appendChild(textS);
     divlabel.appendChild(sDiv);
+    speed.parent(divlabel);
+
+    PVDiv.appendChild(textPV);
     divlabel.appendChild(PVDiv);
+    percentVacc.parent(divlabel);
+
     
     // input changes.
     speed.input(() => {
