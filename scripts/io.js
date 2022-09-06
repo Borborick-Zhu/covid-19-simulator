@@ -10,12 +10,14 @@ function controls() {
     const NBDiv = document.createElement("div");
     const sDiv = document.createElement("div");
     const PVDiv = document.createElement("div");
+    const rDiv = document.createElement("div");
 
     //create text labels.
     var textIR = document.createTextNode("Infection Rate: ");
     var textNB = document.createTextNode("Population: ");
     var textS = document.createTextNode("Speed of Simulation: ");
     var textPV = document.createTextNode("Percent Vaccinated: ");
+    var textR = document.createTextNode("Recovery Time: ");
 
 
     // create sliders.
@@ -23,6 +25,7 @@ function controls() {
     numBalls = createSlider(100, 500, 400, 50);
     speed = createSlider(0, 5, 3, 1);
     percentVacc = createSlider(0, 100, 60, 5);
+    recoveryTime = createSlider(0, 60 * 5, 3 * 60, 60);
 
     // add parents to label.
     IRDiv.appendChild(textIR);
@@ -41,6 +44,12 @@ function controls() {
     divlabel.appendChild(PVDiv);
     percentVacc.parent(divlabel);
 
+    rDiv.appendChild(textR);
+    divlabel.appendChild(rDiv);
+    recoveryTime.parent(divlabel);
+
+    
+
     //creation of button/ implementing use. 
     const resetButton = document.querySelector(".reset-button");
     resetButton.addEventListener("click", Reset);
@@ -49,6 +58,8 @@ function controls() {
         balls = [];
         importPeople();
     }
+
+    
     
     // input changes.
     speed.input(() => {

@@ -56,33 +56,21 @@ class Ball {
           this.others[otherIndex].status = 1;
           this.others[otherIndex].daysInfected = 1; 
         }
-      } else if (this.others[otherIndex].status == 2 && !this.others[otherIndex].vaccinated) {
-        //chance of reinfection is lower. 20%. 
-        if (rand <= 20) {
-          this.others[otherIndex].status = 1; 
-          this.others[otherIndex].daysInfected = 1; 
-        }
       } else if (this.others[otherIndex].status == 3) {
         //chance of infection after 3 doses. Less than 3 percent. 
         if (rand < 3) {
           this.others[otherIndex].status = 1; 
           this.others[otherIndex].daysInfected = 1; 
         }
-      } else {
-        // they have healed and they are also vaccinated. 
-        if (rand == 0) {
-          this.others[otherIndex].status = 1;
-          this.others[otherIndex].daysInfected = 1; 
-        }
-      }
+      } 
     }  
   }
 
   checkInfection() {
     if (this.status == 1) {
-      if (this.daysInfected < infectionTime) {
+      if (this.daysInfected < recoveryTime.value()) {
         // 4 days per second.
-        this.daysInfected += 0.25;
+        this.daysInfected += 1;
       } else {
         this.status = 2;
         this.daysInfected = 0;     
