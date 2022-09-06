@@ -15,7 +15,7 @@ There will be many updates to this site. Namely:
 * Updated UI
 * Another simulation that shows how COVID can spread within different communities. 
 
-##End Product
-You can find the end product at: (https://borborick-zhu.github.io/covid-19-simulator/)
+## End Product
+You can find the end product at: https://borborick-zhu.github.io/covid-19-simulator/
 
 
