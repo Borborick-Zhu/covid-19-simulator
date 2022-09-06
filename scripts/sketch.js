@@ -11,7 +11,7 @@ function setup() {
   
 
 function draw() {
-    background(0);
+    background('#303030');
     move();
 }
 
