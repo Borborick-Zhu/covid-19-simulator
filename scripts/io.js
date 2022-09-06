@@ -21,7 +21,7 @@ function controls() {
     // create sliders.
     infectionRate = createSlider(10, 100, 50, 5);
     numBalls = createSlider(100, 500, 400, 50);
-    speed = createSlider(0, 5, 2, 1);
+    speed = createSlider(0, 5, 3, 1);
     percentVacc = createSlider(0, 100, 60, 5);
 
     // add parents to label.
@@ -41,6 +41,14 @@ function controls() {
     divlabel.appendChild(PVDiv);
     percentVacc.parent(divlabel);
 
+    //creation of button/ implementing use. 
+    const resetButton = document.querySelector(".reset-button");
+    resetButton.addEventListener("click", Reset);
+
+    function Reset() {
+        balls = [];
+        importPeople();
+    }
     
     // input changes.
     speed.input(() => {
