@@ -85,7 +85,7 @@ class Ball {
         this.daysInfected += 0.25;
       } else {
         this.status = 2;
-        this.daysInfected = 0;
+        this.daysInfected = 0;     
       }
     }
   }

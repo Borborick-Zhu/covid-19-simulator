@@ -10,9 +10,24 @@ canvas {
 p {
   font-family: 'Poppins', sans-serif;
 }
+.general-description {
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding-top: 50px;
+  padding-bottom: 30px;
 
+}
 .sim1-container {
   display: flex;
+  margin: 0 auto;
+  padding-left: 27px;
+  padding-right: 27px;
+  column-gap: 30px;
+  justify-content: center;
+  max-width: 1100px;
 }
 
 .parameterLabels {
