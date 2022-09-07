@@ -3,5 +3,5 @@
     "*.js",
     "libraries/*.js",
     "c:\\Users\\Borborick Zhu\\.vscode\\extensions\\samplavigne.p5-vscode-1.2.11\\p5types\\global.d.ts"
-, "scripts/sketch.js", "scripts/Person.js", "scripts/io.js"  ]
+, "scripts/sim1.js", "scripts/Person.js", "scripts/io.js"  ]
 }
