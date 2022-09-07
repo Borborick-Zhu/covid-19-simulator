@@ -99,30 +99,30 @@ var sim1 = function(p) {
                     this.others[i].vx += ax;
                     this.others[i].vy += ay;
 
-                    //this.isInfected();
+                    this.isInfected(i);
                 }
             }
         }
         
-        // isInfected(otherIndex) {
-        //     // infection rate. 
-        //     let rand = Math.floor(Math.random() * 100);
-        //         if (this.status == 1) {
-        //         // meaning itself is infected. 
-        //         if (this.others[otherIndex].status == 0) {
-        //             if (rand <= p.infectionRate.value()) {
-        //             this.others[otherIndex].status = 1;
-        //             this.others[otherIndex].daysInfected = 1; 
-        //             }
-        //         } else if (this.others[otherIndex].status == 3) {
-        //             //chance of infection after 3 doses. Less than 3 percent. 
-        //             if (rand < 3) {
-        //             this.others[otherIndex].status = 1; 
-        //             this.others[otherIndex].daysInfected = 1; 
-        //             }
-        //         } 
-        //     }  
-        // }
+        isInfected(otherIndex) {
+            // infection rate. 
+            let rand = Math.floor(Math.random() * 100);
+                if (this.status == 1) {
+                // meaning itself is infected. 
+                if (this.others[otherIndex].status == 0) {
+                    if (rand <= p.infectionRate.value()) {
+                    this.others[otherIndex].status = 1;
+                    this.others[otherIndex].daysInfected = 1; 
+                    }
+                } else if (this.others[otherIndex].status == 3) {
+                    //chance of infection after 3 doses. Less than 3 percent. 
+                    if (rand < 3) {
+                    this.others[otherIndex].status = 1; 
+                    this.others[otherIndex].daysInfected = 1; 
+                    }
+                } 
+            }  
+        }
 
         checkInfection() {
             if (this.status == 1) {
