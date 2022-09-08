@@ -16,6 +16,12 @@ var sim1 = function(p) {
     let percentVacc; 
     let reInfect = false;
 
+    //graph variables. 
+    let nInfected;
+    let nRecovered;
+    let nVaccinated;
+    let nSusceptible;
+
     
     p.setup = function() {
         p.createCanvas(720, 400);
@@ -59,6 +65,17 @@ var sim1 = function(p) {
         balls[this.numBalls.value() - 1].status = 1;
     }
 
+    p.numInfected = function() {
+        return p.nInfected;
+    }
+
+    p.numVaccAndNotInfected = function() {
+        return p.nVaccinated; 
+    }
+
+    p.numRecovered = function() {
+        return p.nRecovered; 
+    }
 
 
     //implementation for person class.
@@ -123,31 +140,41 @@ var sim1 = function(p) {
                             if (rand <= 10) {
                                 curr.status = 1;
                                 curr.daysInfected = 1;
+                                curr.reinfectCounter++;
+                                p.nInfected++;
                             }
                         } else if (curr.reInfectCounter == 1) {
                             if (rand <= 5) {
                                 curr.status = 1;
                                 curr.daysInfected = 1;
+                                curr.reinfectCounter++;
+                                p.nInfected++;
                             }
                         } else if (curr.reInfectCounter == 2) {
                             if (rand <= 1) {
                                 curr.status = 1;
                                 curr.daysInfected = 1;
+                                curr.reinfectCounter++;
+                                p.nInfected++;
                             }
                         }
                     } else if (this.others[otherIndex].status == 3) {
                         let curr = this.others[otherIndex];
-                        if (curr.reInfectCounter == 0) {
-                            if (rand <= 3) {
-                                curr.status = 1;
+                        if (rand <= 3) {
+                            curr.status = 1;
+                            curr.daysInfected = 1;
+                            p.nInfected++;
+                            p.nVaccinated--;
+                        }
+                    } else if (this.others[otherIndex].status == 2 && this.others[otherIndex].vaccinated) {
+                        let curr = this.others[otherIndex];
+                        if (curr.reinfectCounter == 0) {
+                            if (rand == 0) {
+                                curr.status = 1; 
                                 curr.daysInfected = 1;
+                                p.nInfected++;
                             }
-                        } else if (curr.reInfectCounter == 1) {
-                            if (rand <= 1) {
-                                curr.status = 1;
-                                curr.daysInfected = 1;
-                            }
-                        } 
+                        }
                     }
                 }
             } else {
@@ -157,12 +184,14 @@ var sim1 = function(p) {
                         if (rand <= p.infectionRate.value()) {
                             this.others[otherIndex].status = 1;
                             this.others[otherIndex].daysInfected = 1; 
+                            p.nInfected++;
                         }
                     } else if (this.others[otherIndex].status == 3) {
                         //chance of infection after 3 doses. Less than 3 percent. 
                         if (rand < 3) {
                             this.others[otherIndex].status = 1; 
                             this.others[otherIndex].daysInfected = 1; 
+                            p.nInfected++;
                         }
                     } 
                 }
@@ -177,6 +206,8 @@ var sim1 = function(p) {
                     this.daysInfected += 1;
                 } else {
                     this.status = 2;
+                    p.nInfected--;
+                    p.nRecovered++;
                     this.daysInfected = 0;     
                 }
             }
@@ -235,6 +266,13 @@ var sim1 = function(p) {
         this.speed = p.createSlider(0, 5, 3, 1);
         this.percentVacc = p.createSlider(0, 100, 60, 5);
         this.recoveryTime = p.createSlider(0, 60 * 5, 3 * 60, 60);
+
+        p.nSusceptible = this.numBalls.value() - 1; 
+        p.nInfected = 1; 
+        p.nRecovered = 0; 
+        p.nVaccinated = (this.percentVacc.value() / 100) * this.numBalls.value();
+
+
 
         // add parents to label.
         IRDiv.appendChild(textIR);

@@ -41,6 +41,8 @@ p {
   max-width: 1100px;
 }
 
+
+
 .parameterLabels {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -79,6 +81,7 @@ p {
 .re-infection:active {
   background-color: lightslategray;
 }
+
 
 
 
