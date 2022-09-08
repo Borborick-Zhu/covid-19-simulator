@@ -14,6 +14,7 @@ var sim1 = function(p) {
     let numBalls;
     let speed;
     let percentVacc; 
+    let reInfect = false;
 
     
     p.setup = function() {
@@ -74,6 +75,7 @@ var sim1 = function(p) {
             this.status = status;
             this.vaccinated = false; 
             this.daysInfected = 0;
+            this.reInfectCounter = 0;
             if (this.status == 1) {
             this.daysInfected = 1;
             }
@@ -107,20 +109,64 @@ var sim1 = function(p) {
         isInfected(otherIndex) {
             // infection rate. 
             let rand = Math.floor(Math.random() * 100);
+            if (reInfect) {
                 if (this.status == 1) {
-                // meaning itself is infected. 
-                if (this.others[otherIndex].status == 0) {
-                    if (rand <= p.infectionRate.value()) {
-                    this.others[otherIndex].status = 1;
-                    this.others[otherIndex].daysInfected = 1; 
+                    if (this.others[otherIndex].status == 0) {
+                        if (rand <= p.infectionRate.value()) {
+                            this.others[otherIndex].status = 1;
+                            this.others[otherIndex].daysInfected = 1; 
+                        }
+                    } else if (this.others[otherIndex].status == 2 ) {
+                        // this means that it has recovered. Has not
+                        let curr = this.others[otherIndex];
+                        if (curr.reInfectCounter == 0) {
+                            if (rand <= 10) {
+                                curr.status = 1;
+                                curr.daysInfected = 1;
+                            }
+                        } else if (curr.reInfectCounter == 1) {
+                            if (rand <= 5) {
+                                curr.status = 1;
+                                curr.daysInfected = 1;
+                            }
+                        } else if (curr.reInfectCounter == 2) {
+                            if (rand <= 1) {
+                                curr.status = 1;
+                                curr.daysInfected = 1;
+                            }
+                        }
+                    } else if (this.others[otherIndex].status == 3) {
+                        let curr = this.others[otherIndex];
+                        if (curr.reInfectCounter == 0) {
+                            if (rand <= 3) {
+                                curr.status = 1;
+                                curr.daysInfected = 1;
+                            }
+                        } else if (curr.reInfectCounter == 1) {
+                            if (rand <= 1) {
+                                curr.status = 1;
+                                curr.daysInfected = 1;
+                            }
+                        } 
                     }
-                } else if (this.others[otherIndex].status == 3) {
-                    //chance of infection after 3 doses. Less than 3 percent. 
-                    if (rand < 3) {
-                    this.others[otherIndex].status = 1; 
-                    this.others[otherIndex].daysInfected = 1; 
-                    }
-                } 
+                }
+            } else {
+                if (this.status == 1) {
+                    // meaning itself is infected. 
+                    if (this.others[otherIndex].status == 0) {
+                        if (rand <= p.infectionRate.value()) {
+                            this.others[otherIndex].status = 1;
+                            this.others[otherIndex].daysInfected = 1; 
+                        }
+                    } else if (this.others[otherIndex].status == 3) {
+                        //chance of infection after 3 doses. Less than 3 percent. 
+                        if (rand < 3) {
+                            this.others[otherIndex].status = 1; 
+                            this.others[otherIndex].daysInfected = 1; 
+                        }
+                    } 
+                }
+                
             }  
         }
 
@@ -134,6 +180,7 @@ var sim1 = function(p) {
                     this.daysInfected = 0;     
                 }
             }
+            
         }
 
         move() {
@@ -217,6 +264,19 @@ var sim1 = function(p) {
         resetButton.addEventListener("click", Reset);
 
         function Reset() {
+            balls = [];
+            p.importPeople();
+        }
+
+        const reInfectButton = document.querySelector(".re-infection");
+        reInfectButton.addEventListener("click", reinfectToggle);
+
+        function reinfectToggle() {
+            if (reInfect) {
+                reInfect = false; 
+            } else {
+                reInfect = true;
+            }
             balls = [];
             p.importPeople();
         }

@@ -61,7 +61,24 @@ p {
 }
 
 .reset-button:active {
-  background-color: lightslategray;;
+  background-color: lightslategray;
 }
+
+.re-infection {
+  margin-top: 30px;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition-duration: 0.4s;
+  margin-left: 10px;
+}
+
+.re-infection:active {
+  background-color: lightslategray;
+}
+
 
 
