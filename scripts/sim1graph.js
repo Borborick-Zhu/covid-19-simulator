@@ -1,3 +1,5 @@
+
+
 var sim1graph = function(p) {
     const FRAME_RATE = 10;
     
@@ -19,8 +21,12 @@ var sim1graph = function(p) {
         // will be its current frame. 
         // stop plotting when it has reached the edge (1100 px)
         
-        let susceptible = 
+        let susceptible = sim1.numSusceptible();
+        let infected = sim1.numInfected();
+        let vaccinated = sim1.numVaccAndNotInfected();
+        let recovered = sim1.numRecovered();
 
+        // use these values to constantly sketch the graph. 
     }
 
 }
