@@ -61,9 +61,13 @@ var sim1 = function(p) {
         let percentVal = this.percentVacc.value()/ 100;
         for (let j = 0; j < percentVal * this.numBalls.value(); j++) {
             balls[j].status = 3;
+            nVaccinated = percentVal * this.numBalls.value();
         }
         balls[this.numBalls.value() - 1].status = 1;
+        nInfected = 1;
     }
+
+
 
     p.numInfected = function() {
         return p.nInfected;
@@ -77,6 +81,10 @@ var sim1 = function(p) {
         return p.nRecovered; 
     }
 
+    p.numSusceptible = function () {
+        let val = numBalls.value() - nInfected; 
+        return val;
+    }
 
     //implementation for person class.
     class Ball {

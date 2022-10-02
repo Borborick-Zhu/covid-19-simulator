@@ -14,11 +14,12 @@ var sim1graph = function(p) {
     function createLineDrawer(numberOfBalls) {
         
         // skeches a bunch of dots.
-        //essentially create a class. 
+        // essentially create a class. 
         // its y value will be its respective value and its x intercept
         // will be its current frame. 
         // stop plotting when it has reached the edge (1100 px)
-
+        
+        let susceptible = 
 
     }
 
